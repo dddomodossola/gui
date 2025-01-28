@@ -3498,6 +3498,11 @@ class Slider(Input):
             "remi.sendCallbackParam('%(emitter_identifier)s','%(event_name)s',params);"% \
             {'emitter_identifier':str(self.identifier), 'event_name':Widget.EVENT_ONCHANGE}
 
+        self.attributes[Widget.EVENT_ONINPUT] = \
+            "var params={};params['value']=document.getElementById('%(emitter_identifier)s').value;" \
+            "remi.sendCallbackParam('%(emitter_identifier)s','%(event_name)s',params);"% \
+            {'emitter_identifier':str(self.identifier), 'event_name':Widget.EVENT_ONINPUT}
+
     @decorate_set_on_listener("(self, emitter, value)")
     @decorate_event
     def oninput(self, value):
