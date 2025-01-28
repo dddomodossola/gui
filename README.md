@@ -9,7 +9,7 @@
 </h2>
 
 <p align="center" style="white-space:pre">
-Remi is a GUI library for Python applications that gets rendered in web browsers. 
+Remi is a GUI library for Python applications that gets rendered in web browsers.
 This allows you to access your interface locally and remotely.
 </p>
 
@@ -166,7 +166,7 @@ Run the script. If it's all OK the GUI will be opened automatically in your brow
 You can customize optional parameters in the `start` call like:
 
 ```py
-start(MyApp, address='127.0.0.1', port=8081, multiple_instance=False, enable_file_cache=True, update_interval=0.1, start_browser=True)
+start(MyApp, address='127.0.0.1', port=8081, multiple_instance=False, enable_file_cache=True, update_interval=0.1, start_browser=True, dynamic_web_address=True)
 ```
 
 Parameters:
@@ -184,6 +184,8 @@ Additional Parameters:
 - certfile: SSL certificate filename
 - keyfile: SSL key file
 - ssl_version: authentication version (i.e. ssl.PROTOCOL_TLSv1_2). If None disables SSL encryption
+- dynamic_web_address: set it to `True` if the server is not aware of the IP address and the URL the user will be opening the app with.
+If so, the JavaScript code will use hostname and port in the browser. This parameter is `False` by default.
 
 All widgets constructors accept two standards**kwargs that are:
 - width: can be expressed as int (and is interpreted as a pixel) or as str (and you can specify the measuring unit like '10%')
@@ -312,9 +314,10 @@ Remote access
 ===
 If you are using your REMI app remotely, with a DNS and behind a firewall, you can specify special parameters in the `start` call:
 - **port**: HTTP server port. Don't forget to NAT this port on your router;
+- **dynamic_web_address**: set to `True` if the JavaScript code should use the actual URL's host and port for connecting back to the app, instead of provided IP address. This parameter is `False` by default.
 
 ```py
-start(MyApp, address='0.0.0.0', port=8081)
+start(MyApp, address='0.0.0.0', port=8081, dynamic_web_address=True)
 ```
 
 

@@ -1399,7 +1399,17 @@ class HEAD(Tag):
 
                     var self = this;
                     try{
-                        this._ws = new WebSocket(ws_wss + '://%(host)s/');
+                        host = '%(host)s'
+                        if (host !== ''){
+                            wss_url = `${ws_wss}://${host}/`
+                        }
+                        else{
+                            host = document.location.host;
+                            pathname = document.location.pathname;
+                            wss_url = `${ws_wss}://${document.location.host}${pathname}`;
+                        }
+
+                        this._ws = new WebSocket(wss_url);
                         console.debug('opening websocket');
 
                         this._ws.onopen = function(evt){
